@@ -2,6 +2,11 @@
 
 BcdGoodMorning is a news digest app that supports Ollama, OpenAI, and Groq to help start your day with the latest news.
 
+<img width="371" alt="Screenshot 2025-02-22 at 4 37 16 PM" src="https://github.com/user-attachments/assets/1a1ba1de-64d1-4e4b-ab94-56985ed807a6" />
+<img width="370" alt="Screenshot 2025-02-22 at 4 38 01 PM" src="https://github.com/user-attachments/assets/68a5cc43-7d46-42bb-9b06-e1fbe8b33f57" />
+<img width="374" alt="Screenshot 2025-02-22 at 4 38 20 PM" src="https://github.com/user-attachments/assets/fbe76368-2fb8-487b-b5e3-255b73262a28" />
+<img width="370" alt="Screenshot 2025-02-22 at 4 38 39 PM" src="https://github.com/user-attachments/assets/ac482b86-c9ba-4f5f-b95c-e73c6fec538c" />
+
 ## Features
 
 - **Article Parsing**: Uses a separate article parsing container which uses @postlight/parser to pull information. See [here](https://github.com/diosadentro/bcd-article-parser/tree/main) to setup this container.
