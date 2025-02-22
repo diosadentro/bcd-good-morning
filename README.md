@@ -78,6 +78,10 @@ Supports the following strings:
 2. openai
 3. ollama
 
+```
+    "LLMEngineType": "groq"
+```
+
 #### ArticleParseUrl
 The URL of the postlight parser. Do not include the /parse path. Example:
 ```
@@ -85,7 +89,7 @@ The URL of the postlight parser. Do not include the /parse path. Example:
 ```
 
 #### SMTP Settings
-The SMTP settings for from address, port, server url, username, and password.
+The SMTP settings for from address, port, server url, ssl.
 ```
     "SmtpFromAddress": "no-reply@demo.com",
     "SmtpServer": "demo.server.com",
