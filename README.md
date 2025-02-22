@@ -9,14 +9,14 @@ BcdGoodMorning is a news digest app that supports Ollama, OpenAI, and Groq to he
 - **Customizable**: Customize the number of recipients, weather zipcode, etc via the appsettings.json file or Environment Variables.
 
 ## Dependent Services
-- ArtService: Pulls a daily piece of art using the [Art Institute of Chicago API](https://api.artic.edu/docs/)
-- HolidayService: Pulls today's holidays (if any) from [Calendarific API](https://calendarific.com/)
-- WeatherService: Pulls today's weather and the weather forecast from [openweathermap](https://openweathermap.org/). It uses [openstreetmap](https://www.openstreetmap.org/) to convert zipcode to lat/long for openweathermap.
-- WikipediaService: Uses the [Wikipedia Rest API](https://en.wikipedia.org/api/rest_v1/) to get an article of the day.
-- WordOfTheDayService: Uses the [Merriam-Webster's Word of the Day](https://www.merriam-webster.com/wotd/feed/rss2) RSS feed to pull the word of the day.
-- SalutationService: Uses a registered LLM agent to generate a salutation to start the email
-- NewsService: Uses a registered LLM agent to convert news articles into bite-sized summaries for consumption
-- EmailService: Utilizes an SMTP relay to send the daily digest emails to recipients
+- **ArtService**: Pulls a daily piece of art using the [Art Institute of Chicago API](https://api.artic.edu/docs/)
+- **HolidayService**: Pulls today's holidays (if any) from [Calendarific API](https://calendarific.com/)
+- **WeatherService**: Pulls today's weather and the weather forecast from [openweathermap](https://openweathermap.org/). It uses [openstreetmap](https://www.openstreetmap.org/) to convert zipcode to lat/long for openweathermap.
+- **WikipediaService**: Uses the [Wikipedia Rest API](https://en.wikipedia.org/api/rest_v1/) to get an article of the day.
+- **WordOfTheDayService**: Uses the [Merriam-Webster's Word of the Day](https://www.merriam-webster.com/wotd/feed/rss2) RSS feed to pull the word of the day.
+- **SalutationService**: Uses a registered LLM agent to generate a salutation to start the email
+- **NewsService**: Uses a registered LLM agent to convert news articles into bite-sized summaries for consumption
+- **EmailService**: Utilizes an SMTP relay to send the daily digest emails to recipients
 
 ## Getting Started
 
