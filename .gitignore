@@ -1,0 +1,10 @@
+# Ignore build and IDE files
+bin/
+obj/
+.vscode/
+.idea/
+appsettings.Development.json
+
+# Ignore Rider project settings
+.idea/
+.DS_Store

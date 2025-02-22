@@ -1,0 +1,145 @@
+@using System
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Digest</title>
+    <style>
+        body { font-family: Atiza, ui-serif, Georgia, Cambria, Times New Roman, Times, serif; color: #333; background: #f9f9f9;}
+        p, ul, ol { line-height:  1.8em; font-size: 1.125rem;  }
+        h2 { color: #007bff; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 5px; margin-bottom: 10px; }
+        .header { font-size:  14pt; font-weight:  bold; padding-top: 2px; padding-left: 2px;}
+        .forecast { width: 100%; border-collapse: collapse; }
+        .section { margin-bottom: 20px; }
+        .weather-icon { width: 30px; height: 30px; vertical-align: middle; }
+        .introSection { line-height: 1.8em; }
+        .divider { border: none; height: 1px; background-color: #cccccc; width: 95%; margin-top: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>☀️ Good Morning! Here's your Daily Digest</h2>
+            <div class="introSection section">
+                <p>@Model.Salutation</p>
+            </div>    
+        </div>
+    </div>
+    <div class="container">
+        <div class="weatherSection section">
+            @if(Model.TodayWeather != null) {
+                <div class="header"><img class="weather-icon" src="https://openweathermap.org/img/wn/@(Model.TodayWeather?.Weather?[0].Icon)@@2x.png" alt="Weather Condition"> Today's Weather in @Model.Location</div>
+                <div style="padding: 10px;">
+                    <div class="sunrise">
+                        <strong>Sunrise:</strong> @(Model.TodayWeather?.Sunrise.ToString("h:mm tt")) 
+                        | <strong>Sunset:</strong> @(Model.TodayWeather?.Sunset.ToString("h:mm tt"))
+                    </div>
+                    <p><a href="https://www.newschannel5.com/weather">Today's weather is @Model.TodayWeather?.Weather?[0].Description with a high of @Math.Round(Model.TodayWeather?.Temperature?.Max ?? 0)°F and a low of @Math.Round(Model.TodayWeather?.Temperature?.Min ?? 0)°F.</a><br/>
+                    ☔ Chance of rain is @(Math.Round(Model.TodayWeather?.ProbabilityOfPrecipitation * 100 ?? 0))%.</p>
+                </div>
+            }    
+            @if(Model.Forecast != null && Model.Forecast.Count > 0)
+            {
+                <div class="header">🌤️ 7-Day Forecast</div>
+                <div style="padding: 10px;">
+                    <table class="forecast">
+                        <tbody>
+                            
+                                @foreach (var forecast in Model.Forecast)
+                                {
+                                <tr>
+                                    <td style="border: none;">
+                                        <div><span class="weather-icon"><img class="weather-icon" alt="@forecast.Weather[0].Main" src="https://openweathermap.org/img/wn/@(forecast.Weather[0].Icon)@@2x.png" /> <strong>@forecast.DateTime.ToString("ddd, M/d")</strong> - @forecast.Weather[0].Main</span></div>
+                                        <div style="margin-left: 8px;"> 🌡&nbsp;&nbsp;<strong>@Math.Round(forecast.Temperature.Day)°F</strong> (H: @Math.Round(forecast.Temperature.Max)°F / L: @Math.Round(forecast.Temperature.Min)°F) 💨 @Math.Round(forecast.WindSpeed)mph @forecast.WindCardinalDirection</div>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            } 
+            @if(Model.WeatherAlerts != null && Model.WeatherAlerts.Count > 0) {
+                <div class="header">🚨 Weather Alerts</div>
+                <div style="padding: 10px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        @foreach (var alert in Model.WeatherAlerts)
+                        {
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold;">Issuer:</td>
+                                <td style="padding: 8px;">@alert.SenderName</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold;">Start:</td>
+                                <td style="padding: 8px;">@alert.Start.ToString("dddd, MMMM d, yyyy h:mm tt")</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold;">End:</td>
+                                <td style="padding: 8px;">@alert.End.ToString("dddd, MMMM d, yyyy h:mm tt")</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; font-weight: bold; vertical-align: top;">Details:</td>
+                                <td style="padding: 8px;">@alert.Description.Replace("\n", "<br/>")</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding: 8px;"><hr class="divider" /></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }   
+        </div>
+    </div>
+    <div class="container">
+        <div class="word-of-the-day section">
+            <div class="header">📖 Word of the Day</div>
+            <div style="padding: 10px;">
+                <p>@Model.WordOfTheDay?.Definition</p>
+                <p><a href="@Model.WordOfTheDay?.Url">🔗 Learn More</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="art-of-the-day section">
+            <h3>🎨 Art of the Day</h3>
+            <img src="https://www.artic.edu/iiif/2/@(Model.ArtImage?.ImageId)/full/843,/0/default.jpg" alt="Art of the Day" style="width: 100%; height:  auto;">
+            <p>@Model.ArtImage?.Title - @Model.ArtImage?.ArtistTitle</p>
+            <p>@Model.ArtImage?.Description <a href="https://www.artic.edu/artworks/@(Model.ArtImage?.Id)">🔗 Learn More</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="wikipedia-article-of-the-day section">
+            <div class="header">📚 Wikipedia Article of the Day: @Model.WikipediaData?.Title</div>
+            <div style="padding: 10px;">
+                <p>@Model.WikipediaData?.Description</p>
+                <p>
+                    <img src="@Model.WikipediaData?.OriginalImage?.Source" alt="Image" style="max-width: 600px;">
+                </p>
+                <p>@Model.WikipediaData?.ExtractHtml</p>
+                <p><a href="@Model.WikipediaData?.ContentUrls?.Mobile?.Page" target="_blank">🔗 Read More on Wikipedia</a></p>
+            </div>        
+        </div>
+    </div>
+    <div class="container">
+        <div class="news-section section">
+            <div class="header">📰 News of the Day</div>
+            <div style="padding: 10px;">
+                @if(Model.NewsArticles.Count > 0)
+                {
+                    foreach (var article in Model.NewsArticles)
+                    {
+                        <div class="news-article">
+                            <p><strong>@article.Title</strong> - @article.Source</p>
+                            @if(!string.IsNullOrWhiteSpace(article.Image)) { <p><img src="@article.Image" style="width: 100%; height: auto;" /></p> }
+                            <p>@article.Summary</p>
+                            <p><strong><a href="@article.Link">🔗 Read More</a></strong></p>
+                            <hr class="divider" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
