@@ -293,7 +293,7 @@ public class NewsService : INewsService
                 var request = new LLMRequest()
                 {
                     SystemPrompt = prompt,
-                    UserPrompt = $"The article is located at {article.Link}"
+                    UserPrompt = $"The article URL is {article.Link}"
                 };
 
                 article.OriginalSummary = await _llmClient.GetResponseAsync(request);
@@ -311,7 +311,7 @@ public class NewsService : INewsService
                     "Do not provide any output other than the facts." +
                     "Do not include sources or citations, do not include information about what you corrected.";
                 
-                prompt = $"The facts are: {article.OriginalSummary}. The article is located at {article.Link}.";
+                prompt = $"The facts are: {article.OriginalSummary}. The article URL is {article.Link}.";
 
                 request = new LLMRequest()
                 {
