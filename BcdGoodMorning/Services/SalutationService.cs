@@ -20,11 +20,11 @@ public class SalutationService : ISalutationService
     public async Task<string> GenerateSalutation(string name, string holiday)
     {
         var date = DateTime.Today.ToString("D");
-        var holidayPrompt = !string.IsNullOrWhiteSpace(holiday) ? "Also include details about today's holiday: " + holiday : "";
+        var holidayPrompt = !string.IsNullOrWhiteSpace(holiday) ? "Also include details about today's holiday in a separate paragraph: " + holiday : "";
         var firstName = name.Substring(0, name.IndexOf(' '));
         var systemPrompt =
             $"You are a daily email digest system generating an email that contains important information to start the day. " +
-            $"Generate a short 1-2 paragraph fun introduction to the email. " +
+            $"Generate a 1 paragraph fun introduction to the email. " +
             $"Start by saying hello to {firstName} and provide the day of the week and the date for: {date}. Bold this information using HTML tags. " +
             holidayPrompt +
             $"Use HTML tags to make the greeting look nice, especially paragraph tags to separate paragraphs. " +

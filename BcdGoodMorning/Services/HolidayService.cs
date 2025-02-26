@@ -39,6 +39,10 @@ public class HolidayService : IHolidayService
                     }
                 }
             }
+            catch (Newtonsoft.Json.JsonException)
+            {
+                _logger.LogError("No holidays for today");
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting holiday for today");

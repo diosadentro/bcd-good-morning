@@ -42,6 +42,5 @@ public class HolidayModel
 {
     public Meta Meta { get; set; }
     
-    [JsonConverter(typeof(HolidayJsonConverter))]
     public Response Response { get; set; }
 }
